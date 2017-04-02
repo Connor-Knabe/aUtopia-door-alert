@@ -1,0 +1,10 @@
+{
+    "eventName" : "aUtopia-door-alert-fc2",
+    "url" : "https://maker.ifttt.com/trigger/aUtopia-door-alertfc2/with/key/ENTER_YOUR_MAKER_KEY_HERE",
+    "requestType" : "POST",
+    "query" : {
+        "value1" : "FC 2 Door Alarm",
+        "value2" : "{{SPARK_EVENT_VALUE}}"
+    },
+    "mydevices" : true
+}
