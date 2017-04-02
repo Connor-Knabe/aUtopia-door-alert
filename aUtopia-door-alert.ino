@@ -2,13 +2,13 @@
 #define LED D7
 
 // time to wait before alarm switches states
-#define DEBOUNCE_SECONDS 300
+#define DEBOUNCE_SECONDS 10
 
 // whether or not door open is sensed: 0 = no, 1 = yes
 int opened = 0;
 
 // the alarm state: 0 = off, 1 = on
-int alarmState = 1;
+int alarmState = 0;
 
 // the last time we switched alarm states
 int lastStateSwitchTime = 0;
@@ -29,7 +29,6 @@ void loop() {
     opened = hasBeenOpened();
     if (opened) {
         digitalWrite(LED, HIGH);
-
 
         if (alarmState == 0) {
             // only alarm if we're past the debounce interval
@@ -52,7 +51,6 @@ void loop() {
             if (now - lastStateSwitchTime > DEBOUNCE_SECONDS) {
                 alarmState = 0;
                 lastStateSwitchTime = now;
-                Particle.publish("aUtopia-door-alert-fc2", "off", 60, PRIVATE);
             }
         }
     }
@@ -60,7 +58,7 @@ void loop() {
 
 // determine if we're open or not
 boolean hasBeenOpened() {
-    if (digitalRead(DOOR_SENSOR) == LOW) {
+    if (digitalRead(DOOR_SENSOR) == HIGH) {
         return true;
     } else {
         return false;
